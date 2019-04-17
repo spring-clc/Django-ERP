@@ -211,8 +211,8 @@ class TodoList(models.Model):
     code_link.short_description = _("code")
 
     def href(self):
-        import sys
-        reload(sys)
+        import sys,importlib
+        importlib.reload(sys)
         sys.setdefaultencoding("utf-8")
         ct = ContentType.objects.get(app_label=self.app_name,model=self.model_name)
         obj = ct.get_object_for_this_type(id=self.inst.object_id)
@@ -251,7 +251,7 @@ def get_modal(app_label,model_name):
     """
     try:
         return Modal.objects.get(app_name=app_label,model_name=model_name)
-    except Exception,e:
+    except Exception as e:
         return None
 
 
@@ -266,7 +266,7 @@ def get_instance(obj):
         if modal:
             try:
                 return Instance.objects.get(modal=modal,object_id=obj.id)
-            except Exception,e:
+            except Exception as e:
                 return None
     else:
         return None

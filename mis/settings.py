@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'NAME': 'mis',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'rock1204',
     }
 }
 
@@ -99,7 +99,8 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'zh-CN'
+LANGUAGE_CODE = 'zh-Hans'
+# LANGUAGE_CODE = 'zh-CN'
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 

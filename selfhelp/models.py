@@ -20,7 +20,7 @@ class WorkOrder(generic.BO):
 
     """
     index_weight = 1
-    code = models.CharField(_("workorder code"),blank=True,null=True,max_length=const.DB_CHAR_CODE_10)
+    code = models.CharField(_("工单编号"),blank=True,null=True,max_length=const.DB_CHAR_CODE_10)
     refer = models.ForeignKey("self",verbose_name=_("refer wo"),blank=True,null=True)
     title = models.CharField(_("title"),max_length=const.DB_CHAR_NAME_120)
     description = models.TextField(_("description"),blank=True,null=True)
@@ -67,18 +67,18 @@ class WorkOrder(generic.BO):
                     measure = None
                     try:
                         measure = Measure.objects.get(code=row[4])
-                    except Exception,e:
+                    except Exception as e:
                         measure = Measure.objects.create(code=row[4],name=force_text(row[5]))
                     try:
                         material = Material.objects.get(code=row[0])
-                    except Exception,e:
+                    except Exception as e:
                         material = Material(code=row[0],name=force_text(row[1]),spec=force_text(row[2]))
                         material.save()
                     WOItem.objects.create(workorder=self,material=material,measure=measure,amount=row[6])
 
     class Meta:
-        verbose_name = _("workorder apply")
-        verbose_name_plural = _("workorder apply")
+        verbose_name = _("工单服务")
+        verbose_name_plural = _("工单服务")
 
     class Media:
         js = ('js/workorder.js',)
@@ -155,7 +155,7 @@ class Loan(generic.BO):
         self.save()
 
     class Meta:
-        verbose_name = _("loan")
+        verbose_name = _("借款申请")
         verbose_name_plural = _("loans")
         permissions = (
             ('financial_pay',_("financial pay")),
@@ -238,8 +238,8 @@ class Reimbursement(generic.BO):
     applier.short_description = _('applier')
 
     class Meta:
-        verbose_name = _("reimbursement")
-        verbose_name_plural = _("reimbursements")
+        verbose_name = "费用报销"
+        verbose_name_plural = verbose_name
         permissions = (
             ('financial_pay',_("financial pay")),
         )
